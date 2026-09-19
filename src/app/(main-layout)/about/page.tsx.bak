@@ -1,0 +1,324 @@
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { PageHero } from "@/components/shared/main/PageHero";
+import {
+  CheckCircle2,
+  Award,
+  Target,
+  Eye,
+  ShieldCheck,
+  TrendingUp,
+  Cpu,
+  Users,
+  ArrowRight,
+} from "lucide-react";
+import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { PartnerLogos } from "../(home)/_components/PartnerLogos";
+import { CtaBanner } from "../(home)/_components/CtaBanner";
+
+export const metadata = {
+  title: "About Us | Endustry. - Engineering Heritage & Leadership",
+  description:
+    "Discover the history, leadership, values, and engineering milestones driving Endustry forward as a premier global manufacturing and industrial infrastructure leader.",
+};
+
+interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+  linkedin: string;
+  twitter: string;
+}
+
+const teamMembers: TeamMember[] = [
+  {
+    name: "Arthur Pendelton, PhD",
+    role: "Chief Executive Officer & Founder",
+    bio: "Over 35 years directing civil and heavy mechanical industrial projects across North America and Europe.",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+    linkedin: "https://linkedin.com",
+    twitter: "https://twitter.com",
+  },
+  {
+    name: "Dr. Clara Schilling",
+    role: "Chief Technology Officer",
+    bio: "Pioneering robotic automation, SCADA networks, and sensor architectures for smart factories.",
+    image:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+    linkedin: "https://linkedin.com",
+    twitter: "https://twitter.com",
+  },
+  {
+    name: "Jean-Paul Laurent, PE",
+    role: "VP of Civil Infrastructure",
+    bio: "Specialist in large-span suspension viaducts, seismic engineering, and marine foundation systems.",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+    linkedin: "https://linkedin.com",
+    twitter: "https://twitter.com",
+  },
+  {
+    name: "Soraya Al-Mansoor",
+    role: "Head of Materials & Metallurgy",
+    bio: "Directs chemical synthesis, eco-polymers research, and micro-alloy tensile endurance testing.",
+    image:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
+    linkedin: "https://linkedin.com",
+    twitter: "https://twitter.com",
+  },
+];
+
+const timelineMilestones = [
+  {
+    year: "1950",
+    title: "Founding of TechMach Operations",
+    description:
+      "A group of visionary mechanical engineers opened a precision milling shop, manufacturing heavy gears for national rail lines.",
+  },
+  {
+    year: "1985",
+    title: "International Expansion",
+    description:
+      "Expanded into Western Europe and South America, delivering automated stamping presses and industrial smelting kilns.",
+  },
+  {
+    year: "2008",
+    title: "Renewable Energy Transition",
+    description:
+      "Inaugurated dedicated offshore wind turbine and solar grid infrastructure engineering divisions.",
+  },
+  {
+    year: "Present",
+    title: "Industry 4.0 & AI Robotics",
+    description:
+      "Deploying autonomous mobile robots (AMRs), predictive AI maintenance networks, and zero-carbon industrial facilities.",
+  },
+];
+
+export default function AboutPage() {
+  return (
+    <div className="w-full">
+      {/* 1. Page Hero Banner */}
+      <PageHero
+        title="About Us"
+        breadcrumb="About Us"
+        subtitle="Empowering industries and driving global progress with seven decades of engineering excellence."
+        bgImage="https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=1920&q=80"
+      />
+
+      {/* 2. Overview / Story Section */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            {/* Left Col: Image Gallery */}
+            <div className="lg:col-span-6 relative space-y-4">
+              <div className="relative aspect-4/3 w-full overflow-hidden shadow-2xl rounded-sm">
+                <Image
+                  src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80"
+                  alt="Endustry automated production plant"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="relative aspect-16/9 overflow-hidden shadow-md">
+                  <Image
+                    src="https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80"
+                    alt="Precision welding workshop"
+                    fill
+                    sizes="25vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative aspect-16/9 overflow-hidden shadow-md">
+                  <Image
+                    src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80"
+                    alt="Industrial research and robotics"
+                    fill
+                    sizes="25vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Right Col: Mission, Vision & Narrative */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#e8174e]">
+                <span className="w-6 h-0.5 bg-[#e8174e]" />
+                Your Partner in Industrial Advancement
+              </div>
+
+              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#203556] tracking-tight leading-tight">
+                Pioneering the Standards of Industrial Excellence
+              </h2>
+
+              <p className="text-base text-gray-600 font-sans leading-relaxed">
+                Welcome to Endustry, a global industry innovator with a rich history of precision engineering. With a passion for accuracy and an unwavering commitment to quality, we have been empowering manufacturers and governments worldwide.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+                <div className="p-6 bg-[#f6f8fb] border-l-4 border-[#e8174e] space-y-2">
+                  <div className="flex items-center gap-2 text-[#203556] font-heading font-bold text-lg">
+                    <Target className="w-5 h-5 text-[#e8174e]" />
+                    <span>Our Mission</span>
+                  </div>
+                  <p className="text-xs text-gray-600 font-sans leading-relaxed">
+                    To revolutionize the industrial landscape by delivering turnkey engineering solutions that surpass client expectations and build resilient infrastructure.
+                  </p>
+                </div>
+
+                <div className="p-6 bg-[#f6f8fb] border-l-4 border-[#203556] space-y-2">
+                  <div className="flex items-center gap-2 text-[#203556] font-heading font-bold text-lg">
+                    <Eye className="w-5 h-5 text-[#203556]" />
+                    <span>Our Vision</span>
+                  </div>
+                  <p className="text-xs text-gray-600 font-sans leading-relaxed">
+                    To remain the undisputed global benchmark for smart manufacturing, sustainable decarbonization, and advanced robotic integration.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-2 flex flex-wrap gap-4 text-xs font-semibold text-gray-700">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#e8174e]" />
+                  <span>ISO 9001:2015 Certified</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#e8174e]" />
+                  <span>Zero-Accident Safety Record</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#e8174e]" />
+                  <span>Global Environmental Compliance</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Historical Timeline Section */}
+      <section className="py-20 lg:py-28 bg-[#0b0e14] text-white relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#e8174e]">
+              <span className="w-6 h-0.5 bg-[#e8174e]" />
+              Milestone Heritage
+              <span className="w-6 h-0.5 bg-[#e8174e]" />
+            </div>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+              A Legacy Built Over Generations
+            </h2>
+            <p className="text-sm sm:text-base text-gray-400 font-sans">
+              From our modest post-war manufacturing roots to a multidimensional multinational engineering conglomerate.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {timelineMilestones.map((m, i) => (
+              <div
+                key={m.year}
+                className="bg-[#131722] p-8 border-t-4 border-[#e8174e] border-x border-b border-gray-800 space-y-4 relative group hover:bg-[#181e2c] transition-colors"
+              >
+                <div className="font-heading text-4xl font-extrabold text-[#e8174e]">
+                  {m.year}
+                </div>
+                <h3 className="font-heading text-lg font-bold text-white">
+                  {m.title}
+                </h3>
+                <p className="text-xs text-gray-400 font-sans leading-relaxed">
+                  {m.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Leadership Team Section */}
+      <section className="py-20 lg:py-28 bg-[#f8fafc]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#e8174e]">
+              <span className="w-6 h-0.5 bg-[#e8174e]" />
+              Executive Leadership
+              <span className="w-6 h-0.5 bg-[#e8174e]" />
+            </div>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#203556] tracking-tight">
+              Guided by Visionary Industry Minds
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 font-sans">
+              Our multidisciplinary team brings decades of high-level industrial, scientific, and project management expertise.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teamMembers.map((member) => (
+              <div
+                key={member.name}
+                className="bg-white border border-gray-200/80 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col justify-between"
+              >
+                <div>
+                  <div className="relative aspect-4/5 w-full overflow-hidden bg-gray-100">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                      <div className="flex items-center space-x-3">
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="w-8 h-8 rounded-full bg-white/20 hover:bg-[#e8174e] text-white flex items-center justify-center transition-colors"
+                          aria-label="LinkedIn"
+                        >
+                          <FaLinkedinIn className="w-3.5 h-3.5" />
+                        </a>
+                        <a
+                          href={member.twitter}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="w-8 h-8 rounded-full bg-white/20 hover:bg-[#e8174e] text-white flex items-center justify-center transition-colors"
+                          aria-label="Twitter"
+                        >
+                          <FaXTwitter className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-6 space-y-2">
+                    <h3 className="font-heading text-lg font-bold text-[#203556]">
+                      {member.name}
+                    </h3>
+                    <p className="text-xs text-[#e8174e] font-semibold uppercase tracking-wider">
+                      {member.role}
+                    </p>
+                    <p className="text-xs text-gray-500 font-sans leading-relaxed pt-2">
+                      {member.bio}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Industrial Partner Logos */}
+      <PartnerLogos />
+
+      {/* 6. CTA Banner */}
+      <CtaBanner />
+    </div>
+  );
+}

@@ -1,0 +1,313 @@
+"use client";
+
+import React, { useState } from "react";
+import { PageHero } from "@/components/shared/main/PageHero";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Send,
+  CheckCircle2,
+  Building,
+  Globe2,
+} from "lucide-react";
+import { PartnerLogos } from "../(home)/_components/PartnerLogos";
+
+export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    service: "Mechanical Engineering",
+    message: "",
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }, 1000);
+  };
+
+  return (
+    <div className="w-full">
+      {/* 1. Page Hero Banner */}
+      <PageHero
+        title="Contact Us"
+        breadcrumb="Contact"
+        subtitle="Connect with our senior engineering directors and schedule an on-site feasibility consultation."
+        bgImage="https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=1920&q=80"
+      />
+
+      {/* 2. Contact Information Cards */}
+      <section className="py-16 bg-[#f8fafc] border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Card 1 */}
+            <div className="bg-white p-8 border border-gray-200 shadow-sm space-y-3">
+              <div className="w-12 h-12 bg-[#0a0a0a] text-white flex items-center justify-center">
+                <MapPin className="w-5 h-5 text-[#e8174e]" />
+              </div>
+              <h3 className="font-heading text-lg font-bold text-[#203556]">
+                Global Headquarters
+              </h3>
+              <p className="text-xs text-gray-600 font-sans leading-relaxed">
+                4517 Washington Ave. Manchester, Kentucky 39495, USA
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-white p-8 border border-gray-200 shadow-sm space-y-3">
+              <div className="w-12 h-12 bg-[#0a0a0a] text-white flex items-center justify-center">
+                <Phone className="w-5 h-5 text-[#e8174e]" />
+              </div>
+              <h3 className="font-heading text-lg font-bold text-[#203556]">
+                Direct Lines
+              </h3>
+              <p className="text-xs text-gray-600 font-sans leading-relaxed">
+                +1 (555) 234-5678
+                <br />
+                +1 (555) 876-5432 (24/7 Hotline)
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white p-8 border border-gray-200 shadow-sm space-y-3">
+              <div className="w-12 h-12 bg-[#0a0a0a] text-white flex items-center justify-center">
+                <Mail className="w-5 h-5 text-[#e8174e]" />
+              </div>
+              <h3 className="font-heading text-lg font-bold text-[#203556]">
+                Email Inquiries
+              </h3>
+              <p className="text-xs text-gray-600 font-sans leading-relaxed">
+                info@endustry.org
+                <br />
+                projects@endustry.org
+              </p>
+            </div>
+
+            {/* Card 4 */}
+            <div className="bg-white p-8 border border-gray-200 shadow-sm space-y-3">
+              <div className="w-12 h-12 bg-[#0a0a0a] text-white flex items-center justify-center">
+                <Clock className="w-5 h-5 text-[#e8174e]" />
+              </div>
+              <h3 className="font-heading text-lg font-bold text-[#203556]">
+                Operating Hours
+              </h3>
+              <p className="text-xs text-gray-600 font-sans leading-relaxed">
+                Mon - Fri: 8:00 AM - 6:00 PM EST
+                <br />
+                Emergency Plant Support: 24/7
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Interactive Form & Map Section */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            {/* Left: Contact Form */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#e8174e]">
+                <span className="w-6 h-0.5 bg-[#e8174e]" />
+                Inquire With An Engineer
+              </div>
+
+              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#203556] tracking-tight">
+                Send Us a Detailed Project Brief
+              </h2>
+
+              <p className="text-sm text-gray-600 font-sans leading-relaxed">
+                Please complete the form below. An assigned engineering director will review your technical requirements and respond within 24 business hours.
+              </p>
+
+              {submitted ? (
+                <div className="p-8 bg-green-50 border border-green-200 text-green-900 rounded-none space-y-3">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-6 h-6 text-green-600" />
+                    <h3 className="font-heading text-lg font-bold">
+                      Inquiry Received Successfully!
+                    </h3>
+                  </div>
+                  <p className="text-xs text-green-700 font-sans leading-relaxed">
+                    Thank you, {formData.name}. Your specifications have been forwarded to our senior project estimation team. We will contact you at {formData.email}.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFormData({
+                        name: "",
+                        email: "",
+                        phone: "",
+                        service: "Mechanical Engineering",
+                        message: "",
+                      });
+                    }}
+                    className="mt-4 px-5 py-2 bg-green-700 hover:bg-green-800 text-white text-xs font-bold uppercase tracking-wider"
+                  >
+                    Submit Another Inquiry
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4 pt-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                        Your Full Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
+                        placeholder="e.g. John Doe"
+                        className="w-full px-4 py-3 bg-[#f8fafc] border border-gray-300 focus:border-[#e8174e] focus:outline-none text-sm text-gray-800 transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                        Corporate Email *
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
+                        placeholder="name@company.com"
+                        className="w-full px-4 py-3 bg-[#f8fafc] border border-gray-300 focus:border-[#e8174e] focus:outline-none text-sm text-gray-800 transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
+                        placeholder="+1 (555) 000-0000"
+                        className="w-full px-4 py-3 bg-[#f8fafc] border border-gray-300 focus:border-[#e8174e] focus:outline-none text-sm text-gray-800 transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                        Primary Service Discipline
+                      </label>
+                      <select
+                        value={formData.service}
+                        onChange={(e) =>
+                          setFormData({ ...formData, service: e.target.value })
+                        }
+                        className="w-full px-4 py-3 bg-[#f8fafc] border border-gray-300 focus:border-[#e8174e] focus:outline-none text-sm text-gray-800 transition-colors"
+                      >
+                        <option>Mechanical Engineering</option>
+                        <option>Civil Construction</option>
+                        <option>Chemical & Polymer Research</option>
+                        <option>Power & Renewable Energy</option>
+                        <option>Automotive Industry</option>
+                        <option>Industrial Automation & SCADA</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                      Project Scope & Specifications *
+                    </label>
+                    <textarea
+                      required
+                      rows={5}
+                      value={formData.message}
+                      onChange={(e) =>
+                        setFormData({ ...formData, message: e.target.value })
+                      }
+                      placeholder="Outline your timeline, architectural requirements, tolerance specs, or location..."
+                      className="w-full px-4 py-3 bg-[#f8fafc] border border-gray-300 focus:border-[#e8174e] focus:outline-none text-sm text-gray-800 transition-colors"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="px-8 py-4 bg-[#e8174e] hover:bg-[#c60035] text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-3 shadow-md active:scale-95 disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <span>Dispatching Inquiry...</span>
+                    ) : (
+                      <>
+                        <span>Submit Project Specifications</span>
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
+
+            {/* Right: Map & Regional Hubs */}
+            <div className="lg:col-span-5 space-y-6">
+              {/* Google Map Embed */}
+              <div className="relative h-72 sm:h-80 w-full overflow-hidden shadow-md border border-gray-200">
+                <iframe
+                  title="Endustry Headquarters Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.639373977598!2d-83.76615568469229!3d37.15370217987747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x884352a16d3f2db7%3A0x8673f4e2f9d1bb39!2sManchester%2C%20KY%2040962%2C%20USA!5e0!3m2!1sen!2s!4v1691234567890!5m2!1sen!2s"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                />
+              </div>
+
+              {/* Regional Hubs Box */}
+              <div className="p-6 bg-[#0a0a0a] text-white border-l-4 border-[#e8174e] space-y-4">
+                <div className="flex items-center gap-2">
+                  <Globe2 className="w-5 h-5 text-[#e8174e]" />
+                  <h3 className="font-heading text-lg font-bold">
+                    International Field Hubs
+                  </h3>
+                </div>
+                <div className="space-y-3 text-xs text-gray-300 font-sans divide-y divide-gray-800">
+                  <div className="pt-2">
+                    <span className="font-bold text-white">Western Europe Hub:</span>
+                    <p className="text-gray-400">Rotterdam Port Logistic Center, Netherlands</p>
+                  </div>
+                  <div className="pt-2">
+                    <span className="font-bold text-white">Asia-Pacific Hub:</span>
+                    <p className="text-gray-400">Jurong Industrial Park, Singapore</p>
+                  </div>
+                  <div className="pt-2">
+                    <span className="font-bold text-white">Middle East Hub:</span>
+                    <p className="text-gray-400">JAFZA Industrial Zone, Dubai, UAE</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Partner Logos */}
+      <PartnerLogos />
+    </div>
+  );
+}

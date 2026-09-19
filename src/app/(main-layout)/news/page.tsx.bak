@@ -1,0 +1,252 @@
+"use client";
+
+import React, { useState, useMemo } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { PageHero } from "@/components/shared/main/PageHero";
+import { articlesData, ArticleItem } from "../(home)/_components/LatestNews";
+import {
+  Calendar,
+  User,
+  Clock,
+  Search,
+  ArrowRight,
+  Tag,
+  X,
+} from "lucide-react";
+import { PartnerLogos } from "../(home)/_components/PartnerLogos";
+import { CtaBanner } from "../(home)/_components/CtaBanner";
+
+const categories = [
+  "All",
+  "Automation & Robotics",
+  "Renewable Energy",
+  "Chemical Engineering",
+  "Smart Factory",
+  "Civil Engineering",
+  "Automotive",
+];
+
+export default function NewsPage() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [activeArticle, setActiveArticle] = useState<ArticleItem | null>(null);
+
+  const filteredArticles = useMemo(() => {
+    return articlesData.filter((article) => {
+      const matchesCategory =
+        selectedCategory === "All" || article.category === selectedCategory;
+      const matchesSearch =
+        article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
+
+  return (
+    <div className="w-full">
+      {/* 1. Page Hero Banner */}
+      <PageHero
+        title="News & Articles"
+        breadcrumb="News"
+        subtitle="Insights, research papers, and industrial breakthroughs from our engineering laboratories and field operations."
+        bgImage="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1920&q=80"
+      />
+
+      {/* 2. News Grid & Filtering */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Search & Category Filter Bar */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-16 pb-8 border-b border-gray-200">
+            {/* Category Pills */}
+            <div className="flex flex-wrap items-center gap-2">
+              {categories.map((cat) => {
+                const active = selectedCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+                      active
+                        ? "bg-[#e8174e] text-white shadow-sm"
+                        : "bg-[#f6f8fb] text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Keyword Search */}
+            <div className="relative w-full md:w-72 shrink-0">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search articles..."
+                className="w-full pl-10 pr-4 py-2.5 text-xs text-gray-800 bg-[#f6f8fb] border border-gray-200 focus:border-[#e8174e] focus:outline-none transition-colors"
+              />
+              <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Articles Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredArticles.map((article) => (
+              <article
+                key={article.id}
+                className="bg-white border border-gray-200/80 hover:border-[#e8174e]/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group cursor-pointer"
+                onClick={() => setActiveArticle(article)}
+              >
+                <div>
+                  {/* Thumbnail */}
+                  <div className="relative h-56 w-full overflow-hidden">
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 bg-[#e8174e] text-white text-[11px] font-bold uppercase tracking-wider">
+                        {article.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Body */}
+                  <div className="p-6 sm:p-7 space-y-3">
+                    <div className="flex items-center gap-3 text-xs text-gray-500 font-medium">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-[#e8174e]" />
+                        <span>{article.date}</span>
+                      </div>
+                      <span>•</span>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5 text-[#e8174e]" />
+                        <span>{article.readTime}</span>
+                      </div>
+                    </div>
+
+                    <h3 className="font-heading text-lg sm:text-xl font-bold text-[#203556] group-hover:text-[#e8174e] transition-colors leading-snug">
+                      {article.title}
+                    </h3>
+
+                    <p className="text-sm text-gray-600 leading-relaxed font-sans line-clamp-3">
+                      {article.excerpt}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-6 sm:px-7 pb-6 pt-2 border-t border-gray-100 flex items-center justify-between">
+                  <span className="text-xs text-gray-500 font-medium">
+                    By {article.author}
+                  </span>
+                  <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-bold text-[#203556] group-hover:text-[#e8174e] transition-colors">
+                    <span>Read More</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {filteredArticles.length === 0 && (
+            <div className="text-center py-20 text-gray-500">
+              <p className="text-lg font-heading">No articles found matching your criteria.</p>
+              <button
+                onClick={() => {
+                  setSelectedCategory("All");
+                  setSearchQuery("");
+                }}
+                className="mt-4 px-5 py-2 bg-[#203556] text-white text-xs font-bold uppercase"
+              >
+                Clear Filters
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Article Quick Modal */}
+      {activeArticle && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="relative w-full max-w-3xl bg-white shadow-2xl p-6 sm:p-10 space-y-6 max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => setActiveArticle(null)}
+              className="absolute top-5 right-5 p-2 text-gray-400 hover:text-gray-700 transition-colors"
+              aria-label="Close article"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <div className="relative aspect-16/9 w-full overflow-hidden">
+              <Image
+                src={activeArticle.image}
+                alt={activeArticle.title}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute top-4 left-4">
+                <span className="px-3 py-1 bg-[#e8174e] text-white text-xs font-bold uppercase">
+                  {activeArticle.category}
+                </span>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-4 text-xs text-gray-500 font-medium">
+                <span>Published: {activeArticle.date}</span>
+                <span>•</span>
+                <span>By {activeArticle.author}</span>
+                <span>•</span>
+                <span>{activeArticle.readTime}</span>
+              </div>
+
+              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#203556] leading-snug">
+                {activeArticle.title}
+              </h2>
+
+              <p className="text-base text-gray-700 leading-relaxed font-sans">
+                {activeArticle.excerpt}
+              </p>
+
+              <div className="p-6 bg-[#f6f8fb] border-l-4 border-[#e8174e] text-sm text-gray-700 leading-relaxed italic">
+                &ldquo;Modern industrial infrastructure demands complete interoperability between hardware sensors, heavy mechanical tolerances, and cloud-governed diagnostics.&rdquo;
+              </div>
+
+              <p className="text-sm text-gray-600 leading-relaxed font-sans">
+                At Endustry, our engineering teams continue to run ongoing laboratory trials to establish new durability standards across extreme operational conditions. Contact our researchers for full peer-reviewed whitepapers.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t border-gray-200 flex justify-end">
+              <button
+                onClick={() => setActiveArticle(null)}
+                className="px-6 py-2.5 bg-[#203556] hover:bg-[#12161f] text-white text-xs font-bold uppercase tracking-wider transition-colors"
+              >
+                Close Preview
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 3. Partner Logos */}
+      <PartnerLogos />
+
+      {/* 4. CTA Banner */}
+      <CtaBanner />
+    </div>
+  );
+}
