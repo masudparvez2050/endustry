@@ -1,0 +1,53 @@
+import React from "react";
+import { HeroSlider } from "./_components/HeroSlider";
+import { DynamicSolutions } from "./_components/DynamicSolutions";
+import { TextMarquee } from "./_components/TextMarquee";
+import { IndustryInsights } from "./_components/IndustryInsights";
+import { WorkingProcess } from "./_components/WorkingProcess";
+import { ImageGallerySlider } from "./_components/ImageGallerySlider";
+import { RecentWorksSlider } from "./_components/RecentWorksSlider";
+import { LatestNewsSlider } from "./_components/LatestNewsSlider";
+import { TeamPioneers } from "./_components/TeamPioneers";
+import { LetsConnectCta } from "./_components/LetsConnectCta";
+
+export const metadata = {
+  title: "Endustry. - Modern Industrial, Manufacturing & Engineering Excellence",
+  description:
+    "Endustry - Precision Engineering for a Better World. Dynamic industrial solutions, research and development, and automated engineering.",
+};
+
+export default function HomePage() {
+  return (
+    <div className="w-full bg-[#0a0a0a] text-white">
+      {/* 1. Hero Slider (4 Slides with Ken Burns effect & numbered nav) */}
+      <HeroSlider />
+
+      {/* 2. Dynamic Solutions (3-col checklist & 3 animated stat counters) */}
+      <DynamicSolutions />
+
+      {/* 3. Text Marquee (Infinite outline stroke ticker) */}
+      <TextMarquee />
+
+      {/* 4. Industry Insights (Image card slider + History/Mission/Vision tabs + Progress bars) */}
+      <IndustryInsights />
+
+      {/* 5. Working Process (4 Connected industrial stages) */}
+      <WorkingProcess />
+
+      {/* 6. Image Gallery Slider (6 Industrial highlights carousel with lightbox) */}
+      <ImageGallerySlider />
+
+      {/* 7. Recent Works (Portfolio showcase with 6 projects & thumbnail strip) */}
+      <RecentWorksSlider />
+
+      {/* 8. Latest News (6 Articles slider) */}
+      <LatestNewsSlider />
+
+      {/* 9. Meet the Industry Pioneers (3 Team executive cards) */}
+      <TeamPioneers />
+
+      {/* 10. Let's Connect CTA (Typewriter greeting + 3 Global Offices) */}
+      <LetsConnectCta />
+    </div>
+  );
+}

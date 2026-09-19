@@ -1,0 +1,214 @@
+"use client";
+
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { PageHero } from "@/components/shared/main/PageHero";
+import { servicesData } from "../(home)/_components/ServicesShowcase";
+import {
+  CheckCircle2,
+  ChevronDown,
+  ArrowRight,
+  PhoneCall,
+  ShieldCheck,
+  Award,
+  Zap,
+} from "lucide-react";
+import { PartnerLogos } from "../(home)/_components/PartnerLogos";
+import { CtaBanner } from "../(home)/_components/CtaBanner";
+
+const faqs = [
+  {
+    q: "What certifications and quality standards does Endustry adhere to?",
+    a: "All Endustry engineering and manufacturing divisions operate under ISO 9001:2015 (Quality Management), ISO 14001 (Environmental Management), and ISO 45001 (Occupational Health and Safety) certifications, alongside regional ASME, CE, and ASTM specifications.",
+  },
+  {
+    q: "Can Endustry manage international turnkey infrastructure projects?",
+    a: "Yes. Our global project management division has successfully executed turnkey industrial facilities, subsea energy lines, and heavy manufacturing plants in over 30 countries across Europe, the Americas, and the Middle East.",
+  },
+  {
+    q: "What is your typical project consultation and feasibility lead time?",
+    a: "Initial engineering audits and scoping briefs are typically formulated within 5 to 10 business days. Full CAD/FEA simulation and budgetary modeling are delivered within 3 to 4 weeks depending on architectural scope.",
+  },
+  {
+    q: "Do you provide on-site calibration, training, and ongoing maintenance?",
+    a: "Yes, every commissioned installation includes on-site plant technician training, digital SCADA operations manuals, and 24/7 technical hotline support with scheduled preventative maintenance cycles.",
+  },
+];
+
+export default function ServicesPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  return (
+    <div className="w-full">
+      {/* 1. Page Hero Banner */}
+      <PageHero
+        title="Our Services"
+        breadcrumb="Services"
+        subtitle="End-to-end industrial, civil, and mechanical solutions engineered for demanding global environments."
+        bgImage="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80"
+      />
+
+      {/* 2. Services Grid with Detailed Specifications */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#e8174e]">
+              <span className="w-6 h-0.5 bg-[#e8174e]" />
+              Turnkey Capabilities
+              <span className="w-6 h-0.5 bg-[#e8174e]" />
+            </div>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#203556] tracking-tight">
+              Specialized Industrial Engineering Disciplines
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 font-sans">
+              From microscopic metallurgical tolerances to mega-infrastructure construction, our capabilities scale to meet your exacting standards.
+            </p>
+          </div>
+
+          <div className="space-y-16">
+            {servicesData.map((service, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <div
+                  key={service.id}
+                  className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center p-8 sm:p-10 bg-[#f8fafc] border border-gray-200/80 rounded-sm hover:border-[#e8174e]/40 transition-colors`}
+                >
+                  {/* Image Column */}
+                  <div
+                    className={`lg:col-span-6 relative aspect-16/10 w-full overflow-hidden shadow-lg ${
+                      isEven ? "lg:order-1" : "lg:order-2"
+                    }`}
+                  >
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3.5 py-1 bg-[#0a0a0a]/85 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider">
+                        {service.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Text Column */}
+                  <div
+                    className={`lg:col-span-6 space-y-5 ${
+                      isEven ? "lg:order-2" : "lg:order-1"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-white flex items-center justify-center shadow-md border border-gray-200">
+                        {service.icon}
+                      </div>
+                      <span className="text-xs uppercase tracking-widest font-bold text-[#e8174e]">
+                        0{index + 1} / Discipline
+                      </span>
+                    </div>
+
+                    <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#203556]">
+                      {service.title}
+                    </h3>
+
+                    <p className="text-sm sm:text-base text-gray-600 font-sans leading-relaxed">
+                      {service.description}
+                    </p>
+
+                    <div className="space-y-2 pt-2 border-t border-gray-200">
+                      <p className="text-xs uppercase tracking-wider font-bold text-gray-800">
+                        Core Technical Capabilities:
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {service.features.map((f) => (
+                          <div key={f} className="flex items-center gap-2 text-xs font-medium text-gray-700">
+                            <CheckCircle2 className="w-4 h-4 text-[#e8174e] shrink-0" />
+                            <span>{f}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-3">
+                      <Link
+                        href="/contact"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-[#203556] hover:bg-[#e8174e] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-sm group"
+                      >
+                        <span>Inquire About This Service</span>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. FAQ Accordion Section */}
+      <section className="py-20 lg:py-28 bg-[#f6f8fb] border-t border-gray-200/80">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 space-y-3">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#e8174e]">
+              <span className="w-6 h-0.5 bg-[#e8174e]" />
+              Frequently Asked Questions
+              <span className="w-6 h-0.5 bg-[#e8174e]" />
+            </div>
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#203556] tracking-tight">
+              Industrial Consultation & Operational Inquiries
+            </h2>
+            <p className="text-sm text-gray-600 font-sans">
+              Have questions about our engineering capabilities, warranties, or delivery timeframes?
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <div
+                  key={faq.q}
+                  className="bg-white border border-gray-200 overflow-hidden shadow-sm transition-all"
+                >
+                  <button
+                    onClick={() => toggleFaq(i)}
+                    className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none hover:bg-gray-50/50 transition-colors"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="font-heading text-base sm:text-lg font-bold text-[#203556]">
+                      {faq.q}
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-[#e8174e] shrink-0 transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-6 pb-6 pt-1 text-sm text-gray-600 font-sans leading-relaxed border-t border-gray-100">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Partner Logos */}
+      <PartnerLogos />
+
+      {/* 5. CTA Banner */}
+      <CtaBanner />
+    </div>
+  );
+}
